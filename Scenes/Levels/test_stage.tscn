@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://clm0fpf8u4y33"]
+[gd_scene load_steps=8 format=3 uid="uid://clm0fpf8u4y33"]
 
 [ext_resource type="Texture2D" uid="uid://5ykj7bvaqiem" path="res://Assets/Art/Tilesets/red_tilemap.png" id="1_uo6bk"]
 [ext_resource type="Texture2D" uid="uid://dr6ujg8727hdg" path="res://Assets/Art/Tilesets/tilesheet_complete.png" id="2_01rq4"]
 [ext_resource type="PackedScene" uid="uid://b1f8wt7c4d088" path="res://Scenes/player.tscn" id="2_7yhyi"]
+[ext_resource type="PackedScene" uid="uid://cotiewwn08w2w" path="res://Scenes/UI/gui.tscn" id="4_o5w8o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w20s0"]
 resource_name = "Red"
@@ -1031,4 +1032,5 @@ position = Vector2(96, -288)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" parent="." instance=ExtResource("4_o5w8o")]
+visible = false

@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3 uid="uid://cotiewwn08w2w"]
+
+[ext_resource type="Script" path="res://Scenes/UI/gui.gd" id="1_ry0ky"]
+[ext_resource type="Script" path="res://Scenes/UI/pause.gd" id="2_0k8vh"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_ry0ky")
+
+[node name="Pause" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_0k8vh")
+
+[node name="PauseButton" type="Button" parent="Pause"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -55.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Pause"
+
+[node name="PauseMenu" type="Control" parent="Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Pause/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pause/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/PauseMenu/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Resume Game"
+
+[node name="Control2" type="Control" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Settings" type="Label" parent="Pause/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="GooglyEyeButton" type="Button" parent="Pause/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Googly Eye Mode"
+
+[node name="Control3" type="Control" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Go to Main Menu"
+
+[connection signal="pressed" from="Pause/PauseButton" to="Pause" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="Pause/PauseMenu/CenterContainer/VBoxContainer/ResumeButton" to="Pause" method="_on_resume_button_pressed"]

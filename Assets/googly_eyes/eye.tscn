@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8xx0eyaw4k14"]
+
+[ext_resource type="Script" path="res://Assets/googly_eyes/eye.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://biw726niao5wp" path="res://Assets/googly_eyes/white.png" id="2_mrdrd"]
+[ext_resource type="Texture2D" uid="uid://du0q8filc4jcp" path="res://Assets/googly_eyes/iris.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bdjnirdot4x4u" path="res://Assets/googly_eyes/gloss_2.png" id="4"]
+
+[node name="eye" type="Node2D"]
+script = ExtResource("1")
+iris_size = 30
+
+[node name="white" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_mrdrd")
+
+[node name="iris" type="Node2D" parent="."]
+position = Vector2(-1.13092e-14, 29)
+
+[node name="black" type="Sprite2D" parent="iris"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3")
+
+[node name="gloss" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4")

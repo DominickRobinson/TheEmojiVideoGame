@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1f8wt7c4d088"]
+[gd_scene load_steps=11 format=3 uid="uid://b1f8wt7c4d088"]
 
 [ext_resource type="Texture2D" uid="uid://f7f3ju762xuo" path="res://Assets/Art/Emojis/png/smileys-emotion-00.png" id="1_nr6a3"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_w2v38"]
 [ext_resource type="Texture2D" uid="uid://mbfum1n0cibf" path="res://Assets/Art/Emojis/png/objects-01.png" id="3_q37x3"]
+[ext_resource type="PackedScene" uid="uid://b8xx0eyaw4k14" path="res://Assets/googly_eyes/eye.tscn" id="4_ng8uh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v6tb0"]
 friction = 0.8
@@ -11,8 +12,8 @@ bounce = 0.3
 [sub_resource type="CircleShape2D" id="CircleShape2D_yj034"]
 radius = 31.0161
 
-[sub_resource type="Animation" id="Animation_uyswm"]
-resource_name = "neutral"
+[sub_resource type="Animation" id="Animation_y7wou"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -26,8 +27,8 @@ tracks/0/keys = {
 "values": [34]
 }
 
-[sub_resource type="Animation" id="Animation_y7wou"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_uyswm"]
+resource_name = "neutral"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -97,3 +98,15 @@ texture = ExtResource("3_q37x3")
 hframes = 16
 vframes = 8
 frame = 54
+
+[node name="GooglyEyes" type="Node2D" parent="."]
+
+[node name="eye" parent="GooglyEyes" instance=ExtResource("4_ng8uh")]
+position = Vector2(-12, -6)
+eye_size = 15
+iris_size = 8
+
+[node name="eye2" parent="GooglyEyes" instance=ExtResource("4_ng8uh")]
+position = Vector2(12, -6)
+eye_size = 15
+iris_size = 8

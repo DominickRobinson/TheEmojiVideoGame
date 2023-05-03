@@ -12,8 +12,10 @@ func _ready():
 func _physics_process(_delta):
 	if Input.is_action_pressed("ui_right"):
 		angular_velocity += 1.5
+		linear_velocity.x += 10
 	if Input.is_action_pressed("ui_left"):
 		angular_velocity -= 1.5
+		linear_velocity.x -= 10
 	if Input.is_action_just_pressed("ui_accept"):
 		linear_velocity += Vector2(0, -600)
 	if Input.is_action_just_pressed("ui_down"):
