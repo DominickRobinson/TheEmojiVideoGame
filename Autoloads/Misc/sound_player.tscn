@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cok2detyy3y6o"]
+
+[ext_resource type="Script" path="res://Autoloads/Misc/sound_player.gd" id="1_mm7mh"]
+
+[node name="SoundPlayer" type="AudioStreamPlayer"]
+editor_description = "var occupied  <-- is stream player being used 
+  (for sound effects that require more than just one-shot playing)
+
+Remember to move soundplayer2D to position where sound is coming from"
+script = ExtResource("1_mm7mh")

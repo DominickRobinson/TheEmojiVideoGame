@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1f8wt7c4d088"]
+[gd_scene load_steps=12 format=3 uid="uid://b1f8wt7c4d088"]
 
 [ext_resource type="Texture2D" uid="uid://f7f3ju762xuo" path="res://Assets/Art/Emojis/png/smileys-emotion-00.png" id="1_nr6a3"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_w2v38"]
 [ext_resource type="Texture2D" uid="uid://mbfum1n0cibf" path="res://Assets/Art/Emojis/png/objects-01.png" id="3_q37x3"]
 [ext_resource type="PackedScene" uid="uid://b8xx0eyaw4k14" path="res://Assets/googly_eyes/eye.tscn" id="4_ng8uh"]
+[ext_resource type="PackedScene" uid="uid://b15cecip5ooqh" path="res://Scenes/name_tag.tscn" id="5_ms5xb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v6tb0"]
 friction = 0.8
@@ -100,6 +101,7 @@ vframes = 8
 frame = 54
 
 [node name="GooglyEyes" type="Node2D" parent="."]
+visible = false
 
 [node name="eye" parent="GooglyEyes" instance=ExtResource("4_ng8uh")]
 position = Vector2(-12, -6)
@@ -110,3 +112,8 @@ iris_size = 8
 position = Vector2(12, -6)
 eye_size = 15
 iris_size = 8
+
+[node name="NameTag" parent="." instance=ExtResource("5_ms5xb")]
+position = Vector2(0, -50)
+text = "Dom"
+offset = Vector2(0, -50)

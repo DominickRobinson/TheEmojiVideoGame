@@ -1,0 +1,142 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqqklfmr3vf3m"]
+
+[ext_resource type="PackedScene" uid="uid://cbw4fm4yormuu" path="res://Autoloads/Misc/sound_player_2d.tscn" id="1_a3ak0"]
+[ext_resource type="PackedScene" uid="uid://b504mdxy4n55x" path="res://Autoloads/Misc/music_player.tscn" id="1_amudg"]
+[ext_resource type="Script" path="res://Autoloads/MusicManager.gd" id="1_rjy0k"]
+[ext_resource type="PackedScene" uid="uid://cok2detyy3y6o" path="res://Autoloads/Misc/sound_player.tscn" id="2_n0wv2"]
+[ext_resource type="Script" path="res://Autoloads/SoundManager.gd" id="3_ci7b3"]
+[ext_resource type="Script" path="res://Autoloads/PlayerManager.gd" id="6_r1eap"]
+
+[node name="EverythingStructureBrainstorm" type="Node"]
+editor_description = "brainstorming scene tree structure"
+
+[node name="Autoloads" type="Node" parent="."]
+
+[node name="MusicManager" type="Node" parent="Autoloads"]
+editor_description = "Contains audiostream to play music"
+script = ExtResource("1_rjy0k")
+
+[node name="MusicPlayer" parent="Autoloads/MusicManager" instance=ExtResource("1_amudg")]
+
+[node name="SoundManager" type="Node" parent="Autoloads"]
+editor_description = "Contains pool of audiostreams to play sound effects"
+script = ExtResource("3_ci7b3")
+
+[node name="SoundPlayer2D" parent="Autoloads/SoundManager" instance=ExtResource("1_a3ak0")]
+
+[node name="SoundPlayer" parent="Autoloads/SoundManager" instance=ExtResource("2_n0wv2")]
+
+[node name="LevelManager" type="Node" parent="Autoloads"]
+editor_description = "List of levels and contains functions to transition between them"
+
+[node name="MultiplayerManager" type="Node" parent="Autoloads"]
+
+[node name="PlayerManager" type="Node" parent="Autoloads"]
+editor_description = "Keeps track of personal player info like id, display name, node path, etc."
+script = ExtResource("6_r1eap")
+
+[node name="CameraManager" type="Node" parent="Autoloads"]
+editor_description = "maybe needed?
+Cameras container can connect to this manager on level load"
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Pause" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseButton" type="Control" parent="GUI/Pause"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseMenu" type="Control" parent="GUI/Pause"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Transition" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Players" type="Node" parent="."]
+editor_description = "Contains functions that apply to all players: set googly eyes, toggle player tags"
+
+[node name="LevelContainer" type="Node" parent="."]
+
+[node name="Level" type="Node2D" parent="LevelContainer"]
+
+[node name="Tilemap" type="Node2D" parent="LevelContainer/Level"]
+
+[node name="Objects" type="Node2D" parent="LevelContainer/Level"]
+
+[node name="Spawnpoints" type="Node2D" parent="LevelContainer/Level"]
+
+[node name="Rules" type="Node" parent="LevelContainer/Level"]
+editor_description = "Contains rules for specific minigame
+Should connect signals e.g. on bounce in volleyball, double bounce in tennis, etc."
+
+[node name="CanvasLayer" type="CanvasLayer" parent="LevelContainer/Level/Rules"]
+
+[node name="HowToPlay" type="Control" parent="LevelContainer/Level/Rules/CanvasLayer"]
+editor_description = "Both players are ready and game begins when they click to exit the screen"
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Scores" type="Control" parent="LevelContainer/Level/Rules/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="LevelContainer/Level"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="LevelContainer/Level/ParallaxBackground"]
+
+[node name="Cameras" type="Node2D" parent="."]
+editor_description = "@export var camera_limits : Vetcor2"
+
+[node name="FollowCamera" type="Camera2D" parent="Cameras"]
+
+[node name="MainCamera" type="Camera2D" parent="Cameras"]
+
+[node name="Notes" type="Node" parent="."]
+editor_description = "-Document physics, canvas layers
+-etc."
+
+[node name="ScenesNeeded" type="Node" parent="Notes"]
+
+[node name="MainMenu" type="Node" parent="Notes/ScenesNeeded"]
+
+[node name="Lobby" type="Node" parent="Notes/ScenesNeeded"]
+editor_description = "Contains portals to each game"
+
+[node name="Games" type="Node" parent="Notes/ScenesNeeded"]
+
+[node name="Tennis" type="Node" parent="Notes/ScenesNeeded/Games"]
+
+[node name="Volleyball" type="Node" parent="Notes/ScenesNeeded/Games"]
+
+[node name="Golf" type="Node" parent="Notes/ScenesNeeded/Games"]
+
+[node name="Basketball" type="Node" parent="Notes/ScenesNeeded/Games"]
+
+[node name="Soccer" type="Node" parent="Notes/ScenesNeeded/Games"]
+
+[node name="Sprint" type="Node" parent="Notes/ScenesNeeded/Games"]
+
+[node name="Horse Racing" type="Node" parent="Notes/ScenesNeeded/Games"]
+
+[node name="Platformer" type="Node" parent="Notes/ScenesNeeded/Games"]
+
+[node name="Fighting" type="Node" parent="Notes/ScenesNeeded/Games"]
+
+[node name="SwordFighting" type="Node" parent="Notes/ScenesNeeded/Games/Fighting"]
+
+[node name="Boxing" type="Node" parent="Notes/ScenesNeeded/Games/Fighting"]

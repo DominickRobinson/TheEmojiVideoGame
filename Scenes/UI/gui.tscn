@@ -23,6 +23,7 @@ anchor_right = 1.0
 offset_left = -55.0
 offset_bottom = 31.0
 grow_horizontal = 0
+focus_mode = 0
 text = "Pause"
 
 [node name="PauseMenu" type="Control" parent="Pause"]
@@ -32,67 +33,93 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="Pause/PauseMenu"]
+[node name="PanelContainer" type="PanelContainer" parent="Pause/PauseMenu"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -198.5
+offset_right = 119.0
+offset_bottom = 198.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="Pause/PauseMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Pause/PauseMenu/CenterContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Pause/PauseMenu/PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/PauseMenu/PanelContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 29
 text = "Pause Menu"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Control" type="Control" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
+[node name="Control" type="Control" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="ResumeButton" type="Button" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Resume Game"
 
-[node name="Control2" type="Control" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Settings" type="Label" parent="Pause/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="Settings" type="Label" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="GooglyEyeButton" type="Button" parent="Pause/PauseMenu/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="NameTagsVisibleButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
-text = "Googly Eye Mode"
+text = "Show name tags"
 
-[node name="Control3" type="Control" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="Control3" type="Control" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MoreSettings" type="Label" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "More Settings"
+horizontal_alignment = 1
+
+[node name="GooglyEyeButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+toggle_mode = true
+text = "Googly eye mode"
+
+[node name="PerspectiveModeButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+toggle_mode = true
+text = "Perspective mode"
+
+[node name="Control4" type="Control" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="QuitButton" type="Button" parent="Pause/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Go to Main Menu"
 
 [connection signal="pressed" from="Pause/PauseButton" to="Pause" method="_on_pause_button_pressed"]
-[connection signal="pressed" from="Pause/PauseMenu/CenterContainer/VBoxContainer/ResumeButton" to="Pause" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/ResumeButton" to="Pause" method="_on_resume_button_pressed"]
