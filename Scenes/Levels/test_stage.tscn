@@ -1044,7 +1044,6 @@ zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
 
 [node name="Sword" parent="Player" instance=ExtResource("4_e1wpt")]
-animation_name = "laugh_cry_meme"
 
 [node name="GUI" parent="." instance=ExtResource("4_o5w8o")]
 visible = false

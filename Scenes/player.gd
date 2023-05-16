@@ -76,6 +76,9 @@ func set_animation():
 	
 	if is_instance_valid(current_equipment) and current_equipment.active:
 		anim.play(current_equipment.animation_name)
+	
+	if Input.is_action_pressed("e"):
+		anim.play("laugh_cry_meme")
 
 
 func clamp_linear_velocity(max_lv):
