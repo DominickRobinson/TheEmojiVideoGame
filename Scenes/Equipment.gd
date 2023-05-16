@@ -4,6 +4,7 @@ extends CollisionPolygon2D
 
 var active = false
 @export var animation_name = "attack"
+@export var parent : RigidBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

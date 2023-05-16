@@ -33,7 +33,7 @@ func _ready():
 func get_all_players():
 	players.clear()
 	get_player_children(get_tree().get_root())
-	print(players)
+#	print(players)
 
 
 func get_player_children(node = self):
