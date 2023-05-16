@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdhtrpx60iron"]
+
+[ext_resource type="Script" path="res://Scenes/Equipment.gd" id="1_fi7a0"]
+[ext_resource type="Texture2D" uid="uid://mbfum1n0cibf" path="res://Assets/Art/Emojis/png/objects-01.png" id="2_ewrji"]
+
+[node name="Sword" type="CollisionPolygon2D"]
+position = Vector2(63, 0)
+polygon = PackedVector2Array(-31, 2, -31, -2, -29, -4, -25, -6, -9, -2, -10, -6, -10, -10, -6, -12, -2, -9, -3, -5, 20, -4, 31, -1, 31, 0, 20, 3, -3, 4, -2, 9, -6, 12, -10, 10, -10, 8, -9, 2, -25, 6, -29, 4)
+disabled = true
+script = ExtResource("1_fi7a0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("2_ewrji")
+hframes = 16
+vframes = 8
+frame = 54

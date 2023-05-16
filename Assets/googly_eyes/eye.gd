@@ -10,6 +10,7 @@ var velocity           := Vector2.ZERO
 func _ready():
 	update_threshold()
 	
+	
 func set_eye_size(value):
 	eye_size = max( value, 2 )
 	$white.scale = Vector2(1.0,1.0) * eye_size / 250.0
@@ -42,3 +43,4 @@ func _physics_process(delta):
 	velocity *=  0.99
 	previous_position = global_position
 #	position = get_global_mouse_position()
+#	visible = PlayerManager.googly_mode

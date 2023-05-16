@@ -3,12 +3,16 @@ extends Node
 
 var players : Array[Player]
 
-var googly_mode = false
+var googly_mode = false :
+	set(value):
+		set_googly_eyes(value)
+	get:
+		return googly_mode
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_all_players()
+	googly_mode = false
 
 
 func get_all_players():
@@ -24,7 +28,7 @@ func get_player_children(node = self):
 			if c is Player:
 				players.append(c)
 			get_player_children(c)
-	
+
 
 func set_googly_eyes(googly_on := true):
 	get_all_players()

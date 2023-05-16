@@ -63,8 +63,44 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Controllers" type="Node" parent="GUI"]
+
+[node name="Mobile" type="Node" parent="GUI/Controllers"]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="GUI/Controllers/Mobile"]
+
+[node name="Console" type="Node" parent="GUI/Controllers"]
+
+[node name="PC" type="Node" parent="GUI/Controllers"]
+
 [node name="Players" type="Node" parent="."]
 editor_description = "Contains functions that apply to all players: set googly eyes, toggle player tags"
+
+[node name="Player" type="Node2D" parent="Players"]
+
+[node name="StateMachine" type="Node" parent="Players/Player"]
+
+[node name="Idle" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="SpinSlow" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="SpinFast" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="Jump" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="Fall" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="Slide" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="Ouch" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="Victory" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="Defeat" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="EquipmentDraw" type="Node" parent="Players/Player/StateMachine"]
+
+[node name="EquipmentHide" type="Node" parent="Players/Player/StateMachine"]
 
 [node name="LevelContainer" type="Node" parent="."]
 
@@ -140,3 +176,6 @@ editor_description = "Contains portals to each game"
 [node name="SwordFighting" type="Node" parent="Notes/ScenesNeeded/Games/Fighting"]
 
 [node name="Boxing" type="Node" parent="Notes/ScenesNeeded/Games/Fighting"]
+
+[node name="Wrestling" type="Node" parent="Notes/ScenesNeeded/Games/Fighting"]
+editor_description = "Knock the opponent(s) out of the boxing ring!"

@@ -1,14 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1f8wt7c4d088"]
+[gd_scene load_steps=18 format=3 uid="uid://b1f8wt7c4d088"]
 
 [ext_resource type="Texture2D" uid="uid://f7f3ju762xuo" path="res://Assets/Art/Emojis/png/smileys-emotion-00.png" id="1_nr6a3"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_w2v38"]
-[ext_resource type="Texture2D" uid="uid://mbfum1n0cibf" path="res://Assets/Art/Emojis/png/objects-01.png" id="3_q37x3"]
 [ext_resource type="PackedScene" uid="uid://b8xx0eyaw4k14" path="res://Assets/googly_eyes/eye.tscn" id="4_ng8uh"]
 [ext_resource type="PackedScene" uid="uid://b15cecip5ooqh" path="res://Scenes/name_tag.tscn" id="5_ms5xb"]
+[ext_resource type="Script" path="res://Scenes/OnGround.gd" id="5_sduk2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v6tb0"]
-friction = 0.8
-bounce = 0.3
+friction = 0.6
+bounce = 0.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yj034"]
 radius = 31.0161
@@ -58,19 +58,117 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_tps2w"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [39]
+}
+
+[sub_resource type="Animation" id="Animation_nc2kk"]
+resource_name = "ouch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [49]
+}
+
+[sub_resource type="Animation" id="Animation_y2tk0"]
+resource_name = "spin_slow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [50]
+}
+
+[sub_resource type="Animation" id="Animation_jy514"]
+resource_name = "spin_fast"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [51]
+}
+
+[sub_resource type="Animation" id="Animation_or41i"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [89]
+}
+
+[sub_resource type="Animation" id="Animation_lylnl"]
+resource_name = "laugh_cry_meme"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [151]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fshqp"]
 _data = {
 "RESET": SubResource("Animation_y7wou"),
+"attack": SubResource("Animation_or41i"),
+"fall": SubResource("Animation_tps2w"),
+"laugh_cry_meme": SubResource("Animation_lylnl"),
 "neutral": SubResource("Animation_uyswm"),
-"smile1": SubResource("Animation_1g12r")
+"ouch": SubResource("Animation_nc2kk"),
+"smile1": SubResource("Animation_1g12r"),
+"spin_fast": SubResource("Animation_jy514"),
+"spin_slow": SubResource("Animation_y2tk0")
 }
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("current_equipment")]
 position = Vector2(91, -272)
 center_of_mass_mode = 1
 physics_material_override = SubResource("PhysicsMaterial_v6tb0")
 angular_velocity = 20.0
+angular_damp = 0.8
 script = ExtResource("1_w2v38")
+current_equipment = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.3, 1.3)
@@ -87,26 +185,13 @@ libraries = {
 "": SubResource("AnimationLibrary_fshqp")
 }
 
-[node name="Sword" type="CollisionPolygon2D" parent="."]
-visible = false
-position = Vector2(63, 0)
-polygon = PackedVector2Array(-31, 2, -31, -2, -29, -4, -25, -6, -9, -2, -10, -6, -10, -10, -6, -12, -2, -9, -3, -5, 20, -4, 31, -1, 31, 0, 20, 3, -3, 4, -2, 9, -6, 12, -10, 10, -10, 8, -9, 2, -25, 6, -29, 4)
-disabled = true
-
-[node name="Sprite2D2" type="Sprite2D" parent="Sword"]
-rotation = -1.5708
-texture = ExtResource("3_q37x3")
-hframes = 16
-vframes = 8
-frame = 54
-
 [node name="GooglyEyes" type="Node2D" parent="."]
 visible = false
 
 [node name="eye" parent="GooglyEyes" instance=ExtResource("4_ng8uh")]
 position = Vector2(-12, -6)
-eye_size = 15
-iris_size = 8
+eye_size = 20
+iris_size = 6
 
 [node name="eye2" parent="GooglyEyes" instance=ExtResource("4_ng8uh")]
 position = Vector2(12, -6)
@@ -117,3 +202,7 @@ iris_size = 8
 position = Vector2(0, -50)
 text = "Dom"
 offset = Vector2(0, -50)
+
+[node name="OnGround" type="RayCast2D" parent="."]
+target_position = Vector2(0, 46)
+script = ExtResource("5_sduk2")
