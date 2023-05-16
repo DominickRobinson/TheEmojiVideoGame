@@ -61,7 +61,6 @@ func _physics_process(_delta):
 
 func set_animation():
 
-	var lv = abs(linear_velocity.length())
 	var av = abs(angular_velocity)
 	
 	if av > 15:

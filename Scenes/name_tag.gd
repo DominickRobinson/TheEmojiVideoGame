@@ -12,6 +12,6 @@ func _ready():
 	visible = true
 	
 
-func _process(delta):
+func _process(_delta):
 	global_position = parent.global_position + offset
 	global_rotation = 0
