@@ -6,7 +6,7 @@
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_ry0ky")
 
-[node name="Pause" type="Control" parent="."]
+[node name="Pause" type="Control" parent="." node_paths=PackedStringArray("pause_menu", "pause_button", "main_menu_button", "tags_visible_button", "camera_zoom_slider", "googly_button", "perspective_button", "stable_sprite_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +14,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_0k8vh")
+pause_menu = NodePath("PauseMenu")
+pause_button = NodePath("PauseButton")
+main_menu_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/MainMenuButton")
+tags_visible_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/TagsVisibleButton")
+camera_zoom_slider = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/HSlider")
+googly_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2/GooglyEyeButton")
+perspective_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2/PerspectiveModeButton")
+stable_sprite_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2/StableSpriteModeButton")
 
 [node name="PauseButton" type="Button" parent="Pause"]
 layout_mode = 1
@@ -84,7 +92,7 @@ layout_mode = 2
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="NameTagsVisibleButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="TagsVisibleButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Show name tags"
@@ -98,12 +106,33 @@ theme_override_font_sizes/font_size = 12
 text = "Camera Zoom"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-min_value = 0.5
-max_value = 2.0
+alignment = 1
+
+[node name="Minimum" type="Label" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0.2"
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = 0.2
+max_value = 5.0
 step = 0.1
-value = 1.2
+value = 1.0
+ticks_on_borders = true
+
+[node name="Maximum" type="Label" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "5.0"
+vertical_alignment = 1
 
 [node name="Control3" type="Control" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
@@ -127,6 +156,11 @@ text = "Googly eye mode"
 layout_mode = 2
 toggle_mode = true
 text = "Perspective mode"
+
+[node name="StableSpriteModeButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+toggle_mode = true
+text = "Stable sprite mode"
 
 [node name="Control4" type="Control" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)

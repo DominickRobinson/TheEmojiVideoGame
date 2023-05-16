@@ -1,17 +1,19 @@
-@tool
 extends Node2D
 
 @export var text : String = "*name"
-@export var offset : Vector2 = Vector2(0,0)
+@export var offset : Vector2 = Vector2(0,-48)
+@export var color : Color = Color(1,1,1)
 
-@onready var parent = get_parent()
+@export var target : Node2D
+
 @onready var label = $Label
 
 func _ready():
+	if target == null:
+		queue_free()
 	label.text = text
-	visible = true
-	
+	visible = PlayerManager.tags_visible_mode
 
-func _process(_delta):
-	global_position = parent.global_position + offset
+func _physics_process(_delta):
+	global_position = target.global_position + offset
 	global_rotation = 0

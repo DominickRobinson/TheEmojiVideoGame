@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0usmqobdm34o"
-path="res://.godot/imported/basketball-png-15.png-b8ee6ad4c2b0f611a03b5513619924d5.ctex"
+uid="uid://bfxa7f3qujhg5"
+path="res://.godot/imported/mouse-click.png-97644019c4dce35233911ae43e30b770.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/basketball-png-15.png"
-dest_files=["res://.godot/imported/basketball-png-15.png-b8ee6ad4c2b0f611a03b5513619924d5.ctex"]
+source_file="res://Assets/Art/MouseSprites/mouse-click.png"
+dest_files=["res://.godot/imported/mouse-click.png-97644019c4dce35233911ae43e30b770.ctex"]
 
 [params]
 

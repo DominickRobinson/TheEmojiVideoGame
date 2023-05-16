@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/name_tag.gd" id="1_hi3lw"]
 
 [node name="NameTag" type="Node2D"]
+visible = false
 script = ExtResource("1_hi3lw")
 
 [node name="Label" type="Label" parent="."]

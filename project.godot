@@ -22,6 +22,7 @@ PlayerManager="*res://Autoloads/PlayerManager.gd"
 [display]
 
 window/size/mode=2
+mouse_cursor/custom_image="res://Assets/Art/MouseSprites/mouse-click.png"
 window/stretch/mode="canvas_items"
 
 [input]
