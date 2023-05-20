@@ -1,7 +1,7 @@
 extends Node
 
+const PlayerResource = preload("res://Scenes/player.tscn")
 
-var player
 var players : Array[Player]
 
 #settings
@@ -22,9 +22,9 @@ var perspective_mode = false :
 var stable_sprite_mode = false :
 	set(value):
 		set_stable_sprite_mode(value)
-var tags_visible_mode = true :
+var name_tags_visible_mode = true :
 	set(value):
-		set_tags_visible_mode(value)
+		set_name_tags_visible_mode(value)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -63,14 +63,22 @@ func set_stable_sprite_mode(stable_sprite_on := true):
 		p = p as Player
 		p.stable_sprite_mode = stable_sprite_on
 
-func set_tags_visible_mode(tag_visible := true):
+func set_name_tags_visible_mode(name_tag_visible := true):
 	get_all_players()
 	for p in players:
 		p = p as Player
-		p.tag_visible_mode = tag_visible
+		p.name_tag_visible_mode = name_tag_visible
 
 func set_camera_zoom(zoom):
 	get_all_players()
 	for p in players:
 		p = p as Player
 		p.camera_zoom = zoom
+
+
+func add_player(peer_id):
+	var new_player = PlayerResource.instantiate()
+	new_player.peer_id = str(peer_id)
+	get_tree().current_scene.add_child(new_player, true)
+	new_player.username = str(peer_id)
+	return new_player

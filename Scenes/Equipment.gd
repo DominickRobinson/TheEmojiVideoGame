@@ -1,22 +1,20 @@
 class_name Equipment
 extends CollisionPolygon2D
 
+#@onready var pointer = $Pointer
+
+@export var animation_name = "attack"
+@export_file var icon_file = "res://icon.svg"
 
 var active = false
-@export var animation_name = "attack"
-@export var parent : RigidBody2D
 
-# Called when the node enters the scene tree for the first time.
+var parent : RigidBody2D = get_parent()
+
 func _ready():
-	pass # Replace with function body.
+	toggle(false)
+	parent = get_parent()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-
-
-func toggle(value = not visible):
+func toggle(value = not active):
 	active = value
-	visible = active
-	disabled = not active
+	visible = value
+	disabled = not value

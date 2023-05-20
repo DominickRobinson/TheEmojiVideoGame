@@ -1,5 +1,7 @@
-extends RayCast2D
+extends Node2D
 
+@export var target : Node2D
+@export var equipment : Equipment
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -8,4 +10,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	global_rotation_degrees = 0
+	pass

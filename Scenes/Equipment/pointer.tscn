@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3485dti35eoc"]
+
+[ext_resource type="Texture2D" uid="uid://buaqcrpkv026y" path="res://Assets/Art/Emojis/png/symbols-01.png" id="1_ni05s"]
+
+[node name="Pointer" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(0, -50)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ni05s")
+hframes = 16
+vframes = 8
+frame = 115

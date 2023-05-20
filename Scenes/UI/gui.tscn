@@ -1,23 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cotiewwn08w2w"]
+[gd_scene load_steps=4 format=3 uid="uid://cotiewwn08w2w"]
 
 [ext_resource type="Script" path="res://Scenes/UI/gui.gd" id="1_ry0ky"]
 [ext_resource type="Script" path="res://Scenes/UI/pause.gd" id="2_0k8vh"]
+[ext_resource type="Script" path="res://Scenes/Levels/MainMenu/UsernameEntry.gd" id="4_lbrpa"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_ry0ky")
 
-[node name="Pause" type="Control" parent="." node_paths=PackedStringArray("pause_menu", "pause_button", "main_menu_button", "tags_visible_button", "camera_zoom_slider", "googly_button", "perspective_button", "stable_sprite_button")]
+[node name="Pause" type="Control" parent="." node_paths=PackedStringArray("pause_menu", "pause_button", "main_menu_button", "name_tags_visible_button", "camera_zoom_slider", "googly_button", "perspective_button", "stable_sprite_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("2_0k8vh")
 pause_menu = NodePath("PauseMenu")
 pause_button = NodePath("PauseButton")
 main_menu_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/MainMenuButton")
-tags_visible_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/TagsVisibleButton")
+name_tags_visible_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/NameTagsVisibleButton")
 camera_zoom_slider = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/HSlider")
 googly_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2/GooglyEyeButton")
 perspective_button = NodePath("PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2/PerspectiveModeButton")
@@ -80,7 +82,7 @@ size_flags_horizontal = 4
 text = "Resume Game"
 
 [node name="Control2" type="Control" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
@@ -92,10 +94,22 @@ layout_mode = 2
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="TagsVisibleButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="UsernameEntry" type="LineEdit" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+placeholder_text = "Enter username here"
+alignment = 1
+expand_to_text_length = true
+script = ExtResource("4_lbrpa")
+
+[node name="NameTagsVisibleButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
 toggle_mode = true
 text = "Show name tags"
+
+[node name="Control5" type="Control" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -163,13 +177,17 @@ toggle_mode = true
 text = "Stable sprite mode"
 
 [node name="Control4" type="Control" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="MainMenuButton" type="Button" parent="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Go to Main Menu"
 
 [connection signal="pressed" from="Pause/PauseButton" to="Pause" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/ResumeButton" to="Pause" method="_on_resume_button_pressed"]
+[connection signal="text_changed" from="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/UsernameEntry" to="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer/UsernameEntry" method="_on_text_changed"]
+[connection signal="pressed" from="Pause/PauseMenu/PanelContainer/CenterContainer/VBoxContainer/MainMenuButton" to="Pause" method="_on_main_menu_button_pressed"]

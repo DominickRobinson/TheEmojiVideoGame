@@ -1,11 +1,19 @@
 class_name Ball
 extends RigidBody2D
 
+@export var collision_shape : Node2D
+
 @export var grabbable := true
 
 var target = null
 
-var grabbed = false
+var grabbed = false:
+	set(value):
+		grabbed = value
+		if is_instance_valid(collision_shape):
+			collision_shape.disabled = grabbed
+#		freeze = value
+		custom_integrator = value
 var desired_gp : Vector2
 
 # Called when the node enters the scene tree for the first time.

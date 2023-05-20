@@ -3,10 +3,10 @@ extends AudioStreamPlayer
 
 
 
-func play_sound(sound : AudioStream, loop := false):
+func play_sound(sound : AudioStream, loop_audio := false):
 	
 	#loops audio if necessary
-	if loop: loop()
+	if loop_audio: loop()
 	else: unloop()
 	
 	#loads stream into audio player and plays sound effect

@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5c6ks6j868l2"]
+[gd_scene load_steps=8 format=3 uid="uid://8nug4fkmnd1x"]
 
-[ext_resource type="Script" path="res://Scenes/Equipment/Hands.gd" id="1_y2p4u"]
+[ext_resource type="Script" path="res://Scenes/Equipment/grab_hands.gd" id="1_cr3di"]
 [ext_resource type="Texture2D" uid="uid://8v1x2dx0bojw" path="res://Assets/Art/Emojis/png/people-body-01.png" id="2_tp2cb"]
 
 [sub_resource type="Animation" id="Animation_6dvgi"]
@@ -59,15 +59,15 @@ _data = {
 radius = 17.0
 height = 56.0
 
-[node name="GrabHands" type="CollisionPolygon2D" node_paths=PackedStringArray("pinjoint")]
+[node name="GrabHands" type="CollisionPolygon2D" node_paths=PackedStringArray("pinjoint", "grab_point")]
 position = Vector2(45, 2)
 rotation = 1.5708
 scale = Vector2(0.75, 0.75)
-script = ExtResource("1_y2p4u")
+script = ExtResource("1_cr3di")
 pinjoint = NodePath("Area2D/PinJoint2D")
+grab_point = NodePath("Area2D/StaticBody2D")
 animation_name = "goofy"
-active_seconds = null
-cooldown_seconds = null
+icon_file = "res://Assets/Art/EquipmentIcons/grab-icon.svg"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_tp2cb")
@@ -91,5 +91,8 @@ shape = SubResource("CapsuleShape2D_e5ty5")
 [node name="PinJoint2D" type="PinJoint2D" parent="Area2D"]
 rotation = 1.5708
 scale = Vector2(0.750002, 0.750002)
+node_a = NodePath("../StaticBody2D")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area2D"]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

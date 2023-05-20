@@ -1,14 +1,19 @@
-[gd_scene load_steps=19 format=3 uid="uid://b1f8wt7c4d088"]
+[gd_scene load_steps=25 format=3 uid="uid://brx5bm8vum170"]
 
 [ext_resource type="Texture2D" uid="uid://f7f3ju762xuo" path="res://Assets/Art/Emojis/png/smileys-emotion-00.png" id="1_nr6a3"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_w2v38"]
 [ext_resource type="Script" path="res://Scenes/PlayerSprite.gd" id="3_3ddhe"]
 [ext_resource type="PackedScene" uid="uid://b8xx0eyaw4k14" path="res://Assets/googly_eyes/eye.tscn" id="4_ng8uh"]
-[ext_resource type="Script" path="res://Scenes/OnGround.gd" id="5_sduk2"]
+[ext_resource type="Script" path="res://Scenes/JumpRaycast.gd" id="5_pu6bw"]
+[ext_resource type="PackedScene" uid="uid://b15cecip5ooqh" path="res://Scenes/name_tag.tscn" id="6_42j0d"]
+[ext_resource type="Texture2D" uid="uid://b7k1xb2ckhgkt" path="res://Assets/Art/Icons/eye.svg" id="8_bdlri"]
+[ext_resource type="PackedScene" uid="uid://c3485dti35eoc" path="res://Scenes/Equipment/pointer.tscn" id="9_7ond5"]
+[ext_resource type="Script" path="res://Scenes/UI/EquipmentDisplay.gd" id="9_g57hk"]
+[ext_resource type="Script" path="res://Scenes/UI/StatChanger.gd" id="9_xejs5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v6tb0"]
 friction = 0.6
-bounce = 0.4
+bounce = 0.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yj034"]
 radius = 31.0161
@@ -43,6 +48,21 @@ tracks/0/keys = {
 "values": [89]
 }
 
+[sub_resource type="Animation" id="Animation_fe600"]
+resource_name = "exhale"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [88]
+}
+
 [sub_resource type="Animation" id="Animation_tps2w"]
 resource_name = "fall"
 tracks/0/type = "value"
@@ -56,6 +76,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [39]
+}
+
+[sub_resource type="Animation" id="Animation_32jwc"]
+resource_name = "goofy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [25]
 }
 
 [sub_resource type="Animation" id="Animation_lylnl"]
@@ -148,25 +183,11 @@ tracks/0/keys = {
 "values": [50]
 }
 
-[sub_resource type="Animation" id="Animation_32jwc"]
-resource_name = "goofy"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [25]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fshqp"]
 _data = {
 "RESET": SubResource("Animation_y7wou"),
 "attack": SubResource("Animation_or41i"),
+"exhale": SubResource("Animation_fe600"),
 "fall": SubResource("Animation_tps2w"),
 "goofy": SubResource("Animation_32jwc"),
 "laugh_cry_meme": SubResource("Animation_lylnl"),
@@ -177,12 +198,13 @@ _data = {
 "spin_slow": SubResource("Animation_y2tk0")
 }
 
-[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("current_equipment")]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("equipment_display")]
 center_of_mass_mode = 1
 physics_material_override = SubResource("PhysicsMaterial_v6tb0")
 angular_velocity = 20.0
 script = ExtResource("1_w2v38")
-current_equipment = NodePath("")
+username = "username"
+equipment_display = NodePath("CanvasLayer/Control/EquipmentDisplay")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.3, 1.3)
@@ -193,7 +215,6 @@ frame = 34
 script = ExtResource("3_3ddhe")
 
 [node name="GooglyEyes" type="Node2D" parent="Sprite2D"]
-visible = false
 scale = Vector2(0.769231, 0.769231)
 
 [node name="eye" parent="Sprite2D/GooglyEyes" instance=ExtResource("4_ng8uh")]
@@ -215,9 +236,97 @@ libraries = {
 }
 
 [node name="OnGround" type="RayCast2D" parent="."]
-target_position = Vector2(0, 46)
-script = ExtResource("5_sduk2")
+target_position = Vector2(0, 35)
+script = ExtResource("5_pu6bw")
+
+[node name="OnLeftWall" type="RayCast2D" parent="."]
+target_position = Vector2(-64, 0)
+script = ExtResource("5_pu6bw")
+
+[node name="OnRightWall" type="RayCast2D" parent="."]
+target_position = Vector2(66, 0)
+script = ExtResource("5_pu6bw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -50)
 position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
+[node name="NameTag" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_42j0d")]
+target = NodePath("..")
+
+[node name="StatChanger" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="StatChanger"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="StatChanger/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="StatChanger/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatChanger/Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StatChanger/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StatChanger/Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Player properties"
+
+[node name="Button" type="Button" parent="StatChanger/Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+toggle_mode = true
+button_pressed = true
+icon = ExtResource("8_bdlri")
+flat = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatChanger/Control/PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("player")]
+layout_mode = 2
+theme_override_constants/separation = 5
+script = ExtResource("9_xejs5")
+player = NodePath("../../../../../..")
+stat_panel_path = "res://Scenes/UI/stat.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EquipmentDisplay" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -72.0
+offset_right = 72.0
+grow_vertical = 0
+script = ExtResource("9_g57hk")
+
+[node name="Pointer" parent="." instance=ExtResource("9_7ond5")]
+
+[connection signal="toggled" from="StatChanger/Control/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="StatChanger/Control/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" method="_on_button_toggled"]

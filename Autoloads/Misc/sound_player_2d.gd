@@ -6,7 +6,7 @@ var node_following
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if node_following != null:
 		global_position = node_following.global_position
 

@@ -25,11 +25,12 @@ func _ready():
 
 
 #play regular sound
-func play_sound(sound_name : String, node):
+func play_sound(sound_name : String):
 	var sound_filepath = sound_effects_dictionary[sound_name]
 	var sound = load(sound_filepath)
 	var sound_player = get_free_sound_player().play_sound(sound)
 	return sound_player
+
 #plays 2d sound
 func play_sound_2d(sound_name : String, node):
 	var sound_filepath = sound_effects_dictionary[sound_name]

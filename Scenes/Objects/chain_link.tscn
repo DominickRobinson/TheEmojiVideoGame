@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx0yr15okjysi"]
+[gd_scene load_steps=4 format=3 uid="uid://bx0yr15okjysi"]
 
+[ext_resource type="Script" path="res://Scenes/Objects/chain_link.gd" id="1_7ibuf"]
 [ext_resource type="Texture2D" uid="uid://mbfum1n0cibf" path="res://Assets/Art/Emojis/png/objects-01.png" id="1_w3wle"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4nfbe"]
@@ -9,18 +10,18 @@ height = 64.0
 collision_layer = 0
 collision_mask = 0
 mass = 0.2
+script = ExtResource("1_7ibuf")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
-position = Vector2(1, 23)
-node_a = NodePath("..")
-node_b = NodePath("../../../Hoop")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(21, 0)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_4nfbe")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
-position = Vector2(1, 0)
 texture = ExtResource("1_w3wle")
+offset = Vector2(1, 0)
 hframes = 16
 vframes = 8
 frame = 66

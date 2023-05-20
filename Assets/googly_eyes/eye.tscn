@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bdjnirdot4x4u" path="res://Assets/googly_eyes/gloss_2.png" id="4"]
 
 [node name="eye" type="Node2D"]
+visible = false
 script = ExtResource("1")
 iris_size = 30
 
@@ -14,7 +15,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_mrdrd")
 
 [node name="iris" type="Node2D" parent="."]
-position = Vector2(-4.9392e-17, 29)
+position = Vector2(1.00044e-38, 29)
 
 [node name="black" type="Sprite2D" parent="iris"]
 scale = Vector2(0.2, 0.2)
